@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratyush Kumar - Developer Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000; /* True Black */
+            color: #e2e8f0; /* Slate-200 */
+        }
+        .glass-effect {
+            background: rgba(0, 0, 0, 0.7); /* Black with opacity */
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5); /* Slate-700 with opacity */
+        }
+        .accent-color {
+            color: #22d3ee; /* Cyan-400 */
+        }
+        .bg-accent {
+            background-color: #22d3ee; /* Cyan-400 */
+        }
+        .border-accent {
+            border-color: #22d3ee; /* Cyan-400 */
+        }
+        .text-heading {
+            color: #f8fafc; /* Slate-50 */
+        }
+        .gsap-reveal {
+            opacity: 0;
+        }
+        .bg-card {
+            background-color: #18181b; /* Zinc-900 */
+        }
+        .bg-chip {
+            background-color: #27272a; /* Zinc-800 */
+        }
+        .btn {
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
+        }
+        /* Timeline styling */
+        .timeline-item {
+            position: relative;
+            padding-left: 2.5rem;
+            padding-bottom: 2rem;
+            border-left: 2px solid #334155; /* Slate-700 */
+        }
+        .timeline-item:last-child {
+            border-left: 2px solid transparent;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -0.5rem;
+            top: 0.25rem;
+            height: 1rem;
+            width: 1rem;
+            background-color: #22d3ee;
+            border-radius: 9999px;
+            border: 2px solid #000;
+        }
+        /* Marquee animation for testimonials */
+        @keyframes marquee {
+            0% { transform: translateX(0%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+        .marquee-container:hover .animate-marquee {
+            animation-play-state: paused;
+        }
+        /* Tab and Nav styling */
+        .tab-btn.active {
+            background-color: #22d3ee;
+            color: #000;
+        }
+        #main-nav a.active {
+            color: #22d3ee;
+        }
+        /* Particle background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+        /* Typing effect */
+        .typed-cursor {
+            opacity: 1;
+            animation: blink 0.7s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div id="particles-js"></div>
+
+    <!-- Header -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-heading flex items-center gap-2">
+                <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 7.5l3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0021 18V6a2.25 2.25 0 00-2.25-2.25H5.25A2.25 2.25 0 003 6v12a2.25 2.25 0 002.25 2.25z" />
+                </svg>
+                <span class="hidden sm:block">Pratyush Kumar</span>
+            </a>
+            <div id="main-nav" class="hidden md:flex space-x-8 items-center text-sm font-medium text-slate-300">
+                <a href="#about" class="hover:text-cyan-400 transition-colors duration-300">About</a>
+                <a href="#experience" class="hover:text-cyan-400 transition-colors duration-300">Experience</a>
+                <a href="#skills" class="hover:text-cyan-400 transition-colors duration-300">Skills</a>
+                <a href="#projects" class="hover:text-cyan-400 transition-colors duration-300">Projects</a>
+                <a href="#testimonials" class="hover:text-cyan-400 transition-colors duration-300">Testimonials</a>
+                <a href="#contact" class="border border-cyan-400 text-cyan-400 px-4 py-2 rounded-md hover:bg-cyan-400/10 transition-colors duration-300 btn">Contact</a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-heading focus:outline-none">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900">
+             <a href="#about" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">About</a>
+            <a href="#experience" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Experience</a>
+            <a href="#skills" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Skills</a>
+            <a href="#projects" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Projects</a>
+            <a href="#testimonials" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Testimonials</a>
+            <a href="#contact" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-24 md:pt-32 relative z-10">
+
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-[85vh] flex items-center">
+            <div class="max-w-4xl z-10">
+                <p class="text-lg text-cyan-400 mb-4 font-medium gsap-reveal">Hi, my name is</p>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-heading mb-4 gsap-reveal" data-gsap-delay="100">Pratyush Kumar.</h1>
+                <h2 class="text-4xl md:text-6xl font-bold text-slate-400 mb-6 gsap-reveal" data-gsap-delay="200">I build <span id="typed-text" class="text-cyan-400"></span><span class="typed-cursor">|</span></h2>
+                <p class="text-slate-400 max-w-xl mb-8 gsap-reveal" data-gsap-delay="300">
+                    I'm a passionate developer specializing in creating intelligent, full-stack AI solutions that solve real-world problems.
+                </p>
+                <div class="flex items-center gap-6 gsap-reveal" data-gsap-delay="400">
+                    <a href="#contact" class="btn bg-cyan-500 text-black font-semibold px-8 py-3 rounded-md">Get In Touch</a>
+                    <a href="https://drive.google.com/file/d/1QErmrJby-6zbbYrW97wR54bsZNkfEHoN/view?usp=sharing" target="_blank" class="btn border border-cyan-400 text-cyan-400 font-semibold px-8 py-3 rounded-md hover:bg-cyan-400/10">Download Resume</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 md:py-32">
+            <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 items-start">
+                <div class="md:col-span-2 gsap-reveal">
+                    <h2 class="text-3xl font-bold text-heading mb-6">About Me</h2>
+                    <div class="space-y-4 text-slate-400">
+                        <p>
+                           Hello! I'm Pratyush, a developer and student at <span class="text-cyan-400 font-medium">Thapar Institute of Engineering and Technology</span>, passionate about building full-stack AI applications.
+                        </p>
+                        <p>
+                           My experience includes creating an intelligent chatbot for <span class="text-cyan-400 font-medium">Panasonic</span> and an AI interior design tool for <span class="text-cyan-400 font-medium">Exceldes Interiors</span>, where I turn complex challenges into intuitive solutions.
+                        </p>
+                    </div>
+                </div>
+                <div class="gsap-reveal" data-gsap-delay="100">
+                    <h3 class="text-2xl font-bold text-heading mb-6">Achievements</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <svg class="w-10 h-10 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 01-4.874-1.933m18.748 0a9.75 9.75 0 00-4.874-1.933h-9m13.874 0a9.75 9.75 0 00-13.874 0M12 21v-2.25A4.5 4.5 0 007.5 14.25v-3.75a4.5 4.5 0 019 0v3.75a4.5 4.5 0 00-4.5 4.5V21z" /></svg>
+                            <div>
+                                <h4 class="font-bold text-heading">Silver Medalist, Mathematics Olympiad</h4>
+                                <p class="text-sm text-slate-400">Secured top rank in Delhi regional round.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-4">
+                            <svg class="w-10 h-10 text-cyan-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.75 18.5a6.25 6.25 0 100-12.5 6.25 6.25 0 000 12.5zM12 22a1 1 0 001-1v-2.5a1 1 0 10-2 0V21a1 1 0 001 1z" /></svg>
+                            <div>
+                                <h4 class="font-bold text-heading">Runner-up, Table Tennis</h4>
+                                <p class="text-sm text-slate-400">Thaparlympics 2025, Inter-university Championship.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Experience Section -->
+        <section id="experience" class="py-20 md:py-32">
+            <h2 class="text-3xl font-bold text-heading text-center mb-12 gsap-reveal">Experience</h2>
+            <div class="max-w-3xl mx-auto gsap-reveal">
+                <div class="timeline-item">
+                    <div class="timeline-logo">
+                        <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-heading mb-1">Panasonic</h3>
+                    <p class="text-cyan-400 font-medium mb-2">AI/ML Intern | June 2025 – August 2025</p>
+                    <p class="text-slate-400 text-sm mb-3">Developed an intelligent self-help chatbot to replace Panasonic’s outdated FAQ system, boosting customer engagement. Implemented local inference using Ollama and a robust RAG pipeline.</p>
+                    <p class="text-xs text-slate-500 italic">• Boosted customer engagement by replacing an outdated FAQ system.</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-logo">
+                        <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-heading mb-1">Exceldes Interiors</h3>
+                    <p class="text-cyan-400 font-medium mb-2">Technology Development Intern | June 2024 – August 2024</p>
+                    <p class="text-slate-400 text-sm mb-3">Built a full-stack AI-powered interior design website that converts real room photos into personalized design makeovers, featuring a vector-based recommendation engine.</p>
+                    <p class="text-xs text-slate-500 italic">• Converted real room photos into personalized design makeovers with AI.</p>
+                </div>
+                <div class="timeline-item">
+                     <div class="timeline-logo">
+                        <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-heading mb-1">Vedanta IAS Academy</h3>
+                    <p class="text-cyan-400 font-medium mb-2">Full-Stack Developer | Jan 2024 – Feb 2024</p>
+                    <p class="text-slate-400 text-sm mb-3">Built a full-stack web app to help UPSC students analyze geopolitical topics through interactive, model-driven insights, with downloadable PDF notes.</p>
+                    <p class="text-xs text-slate-500 italic">• Enabled geopolitical analysis for students with model-driven insights.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" class="py-20 md:py-32">
+            <h2 class="text-3xl font-bold text-heading text-center mb-12 gsap-reveal">Education & Volunteering</h2>
+            <div class="max-w-3xl mx-auto gsap-reveal grid md:grid-cols-2 gap-12">
+                <div>
+                    <h3 class="text-2xl font-bold text-heading mb-6">Education</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-bold text-heading">Thapar Institute of Engineering and Technology</h4>
+                        <p class="text-cyan-400 text-sm mb-1">B.E, Computer and Electronics Engineering</p>
+                        <p class="text-slate-400 text-xs">2022 - Present</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-bold text-heading">Bloom Public School</h4>
+                        <p class="text-slate-400 text-sm">10th Grade: 89.3% | 12th Grade: 85%</p>
+                    </div>
+                </div>
+                 <div>
+                    <h3 class="text-2xl font-bold text-heading mb-6">Volunteer Work</h3>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-bold text-heading">Toyota Road Safety Summit</h4>
+                        <p class="text-cyan-400 font-medium mb-2">Speaker | Jan 2019 - Present</p>
+                        <p class="text-slate-400 text-sm">Addressed the summit to raise awareness about road safety, advocating for safer driving practices and engaging with attendees to promote responsible road behavior.</p>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-dot"></div>
+                        <h4 class="font-bold text-heading">Bal Vikas Organization</h4>
+                        <p class="text-cyan-400 font-medium mb-2">Volunteer Educator | March 2023</p>
+                        <p class="text-slate-400 text-sm">Provided personalized math tutoring to underprivileged students, fostering a supportive learning environment and improving academic performance.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Competencies Section -->
+        <section id="core-competencies" class="py-20 md:py-32">
+            <div class="max-w-5xl mx-auto text-center">
+                 <h2 class="text-3xl font-bold text-heading mb-12 gsap-reveal">Core Competencies</h2>
+                 <div class="grid md:grid-cols-3 gap-8 text-left">
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal">
+                         <h3 class="text-xl font-bold text-heading mb-4">Relevant Coursework</h3>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">DBMS</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Operating Systems</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Data Structures</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Algorithms</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">OOPS</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">AI & NLP</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                         </div>
+                     </div>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal" data-gsap-delay="100">
+                         <h3 class="text-xl font-bold text-heading mb-4">Soft Skills</h3>
+                         <div class="flex flex-wrap gap-2">
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Public Speaking</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Leadership</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Event Management</span>
+                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Geopolitical Analysis</span>
+                         </div>
+                     </div>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal" data-gsap-delay="200">
+                         <h3 class="text-xl font-bold text-heading mb-4">Coding Profiles</h3>
+                         <div class="space-y-4">
+                             <div class="text-center">
+                                <h4 class="font-semibold text-2xl text-cyan-400">350+</h4>
+                                <p class="text-sm text-slate-400">Problems Solved on LeetCode</p>
+                                <a href="https://leetcode.com/u/pratyushkr/" target="_blank" class="text-cyan-400 hover:underline text-sm mt-2 inline-block">View Profile</a>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="py-20 md:py-32">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-heading mb-4 gsap-reveal">My Tech Stack</h2>
+                <p class="text-slate-400 mb-12 gsap-reveal">Technologies and languages I work with to build digital experiences.</p>
+                <div class="flex flex-wrap justify-center mb-8 gsap-reveal gap-2" id="skill-tabs">
+                    <button class="tab-btn active px-4 py-2 rounded-md font-medium text-sm" data-tab="languages">Languages</button>
+                    <button class="tab-btn px-4 py-2 rounded-md font-medium text-sm" data-tab="frameworks">Libraries & Frameworks</button>
+                    <button class="tab-btn px-4 py-2 rounded-md font-medium text-sm" data-tab="ml">Machine Learning</button>
+                    <button class="tab-btn px-4 py-2 rounded-md font-medium text-sm" data-tab="ai">AI Tools</button>
+                    <button class="tab-btn px-4 py-2 rounded-md font-medium text-sm" data-tab="web">Web Development</button>
+                    <button class="tab-btn px-4 py-2 rounded-md font-medium text-sm" data-tab="db">Databases & Tools</button>
+                </div>
+                <div id="skill-content" class="gsap-reveal">
+                    <div class="tab-content grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="languages"></div>
+                    <div class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="frameworks"></div>
+                    <div class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="ml"></div>
+                    <div class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="ai"></div>
+                    <div class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="web"></div>
+                    <div class="tab-content hidden grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6" id="db"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="py-20 md:py-32">
+            <h2 class="text-3xl font-bold text-heading text-center mb-12 gsap-reveal">My Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Cards Here -->
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 md:py-32">
+            <h2 class="text-3xl font-bold text-heading text-center mb-12 gsap-reveal">What Others Say</h2>
+            <div class="relative w-full overflow-hidden marquee-container">
+                <div class="flex w-max animate-marquee">
+                    <!-- Cards -->
+                    <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"Pratyush's work on the AI chatbot was exceptional. He delivered a high-quality product that significantly improved our customer support."</p>
+                        <p class="font-bold text-heading">Siva San</p>
+                        <p class="text-sm text-cyan-400">Tech Architect, Panasonic</p>
+                    </div>
+                    <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"His ability to quickly grasp complex concepts and implement them into a functional full-stack application is impressive. A true asset to the team."</p>
+                        <p class="font-bold text-heading">Tech Head</p>
+                        <p class="text-sm text-cyan-400">Exceldes Interiors</p>
+                    </div>
+                    <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"Working with Pratyush on group projects is always a great experience. He's a natural leader and his problem-solving skills are top-notch. He consistently elevates the team's work."</p>
+                        <p class="font-bold text-heading">Kushagra Nagpal</p>
+                        <p class="text-sm text-cyan-400">Thapar Institute Student</p>
+                    </div>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"An incredibly sharp problem solver. Pratyush consistently finds elegant solutions to difficult algorithmic challenges."</p>
+                        <p class="font-bold text-heading">Sandeep Mandiya</p>
+                        <p class="text-sm text-cyan-400">Professor, Thapar Institute</p>
+                    </div>
+
+                    <!-- Duplicate Cards for seamless loop -->
+                    <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"Pratyush's work on the AI chatbot was exceptional. He delivered a high-quality product that significantly improved our customer support."</p>
+                        <p class="font-bold text-heading">Siva San</p>
+                        <p class="text-sm text-cyan-400">Tech Architect, Panasonic</p>
+                    </div>
+                    <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"His ability to quickly grasp complex concepts and implement them into a functional full-stack application is impressive. A true asset to the team."</p>
+                        <p class="font-bold text-heading">Tech Head</p>
+                        <p class="text-sm text-cyan-400">Exceldes Interiors</p>
+                    </div>
+                    <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"Working with Pratyush on group projects is always a great experience. He's a natural leader and his problem-solving skills are top-notch. He consistently elevates the team's work."</p>
+                        <p class="font-bold text-heading">Kushagra Nagpal</p>
+                        <p class="text-sm text-cyan-400">Thapar Institute Student</p>
+                    </div>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
+                        <p class="text-slate-400 mb-4">"An incredibly sharp problem solver. Pratyush consistently finds elegant solutions to difficult algorithmic challenges."</p>
+                        <p class="font-bold text-heading">Sandeep Mandiya</p>
+                        <p class="text-sm text-cyan-400">Professor, Thapar Institute</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 md:py-32">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl font-bold text-heading mb-4 gsap-reveal">Get In Touch</h2>
+                <p class="text-slate-400 mb-8 gsap-reveal">I'm currently open to new opportunities and collaborations. Feel free to reach out!</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <a href="mailto:pratyushkr1002@gmail.com" class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal hover:border-cyan-400 transition-colors">
+                        <h3 class="text-xl font-bold text-heading mb-2">Email</h3>
+                        <p class="text-cyan-400">pratyushkr1002@gmail.com</p>
+                    </a>
+                    <a href="tel:+919560388849" class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal hover:border-cyan-400 transition-colors" data-gsap-delay="100">
+                        <h3 class="text-xl font-bold text-heading mb-2">Phone</h3>
+                        <p class="text-cyan-400">+91 9560388849</p>
+                    </a>
+                    <a href="https://www.linkedin.com/in/pratyush-kumar-7b844a216/" target="_blank" class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal hover:border-cyan-400 transition-colors" data-gsap-delay="200">
+                        <h3 class="text-xl font-bold text-heading mb-2">LinkedIn</h3>
+                        <p class="text-cyan-400">Connect with me</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-transparent">
+        <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+            <p class="text-sm">Designed & Built by Pratyush Kumar</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Particle.js config
+            particlesJS("particles-js", {
+                "particles": {
+                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                    "color": { "value": "#22d3ee" },
+                    "shape": { "type": "circle" },
+                    "opacity": { "value": 0.5, "random": false },
+                    "size": { "value": 3, "random": true },
+                    "line_linked": { "enable": true, "distance": 150, "color": "#22d3ee", "opacity": 0.4, "width": 1 },
+                    "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
+                },
+                "interactivity": {
+                    "detect_on": "canvas",
+                    "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
+                    "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
+                },
+                "retina_detect": true
+            });
+
+            // Typed.js config
+            new Typed('#typed-text', {
+                strings: ['intelligent applications.', 'web solutions.', 'AI models.'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                loop: true
+            });
+
+            // Mobile menu toggle
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if(mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+                document.querySelectorAll('#mobile-menu a').forEach(link => link.addEventListener('click', () => mobileMenu.classList.add('hidden')));
+            }
+
+            // Sticky header
+            const header = document.getElementById('header');
+            if(header) {
+                window.addEventListener('scroll', () => {
+                    header.classList.toggle('glass-effect', window.scrollY > 50);
+                });
+            }
+
+            // GSAP animations
+            gsap.registerPlugin(ScrollTrigger);
+            gsap.utils.toArray('.gsap-reveal').forEach(elem => {
+                gsap.fromTo(elem, { y: 50, opacity: 0 }, {
+                    y: 0,
+                    opacity: 1,
+                    duration: 1,
+                    delay: elem.dataset.gsapDelay / 1000 || 0,
+                    scrollTrigger: {
+                        trigger: elem,
+                        start: 'top 90%',
+                        toggleActions: 'play none none none'
+                    }
+                });
+            });
+            
+            // Tab logic function
+            function setupTabs(tabContainerId, contentContainerId) {
+                const tabButtons = document.querySelectorAll(`#${tabContainerId} .tab-btn`);
+                const tabContents = document.querySelectorAll(`#${contentContainerId} .tab-content`);
+                tabButtons.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const tabId = button.dataset.tab;
+                        tabButtons.forEach(btn => btn.classList.remove('active'));
+                        button.classList.add('active');
+                        tabContents.forEach(content => {
+                            content.classList.toggle('hidden', content.id !== tabId);
+                        });
+                    });
+                });
+            }
+
+            // Initialize both tab sections
+            setupTabs('skill-tabs', 'skill-content');
+            setupTabs('competency-tabs', 'competency-content');
+            
+            // Active nav on scroll
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('#main-nav a');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (pageYOffset >= sectionTop - 60) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+            // Populate Skills with Logos
+            const skillsData = {
+                languages: [
+                    { name: 'C', icon: '🇨' },
+                    { name: 'C++', icon: '++' },
+                    { name: 'Python', icon: '🐍' },
+                    { name: 'SQL', icon: '🗃️' }
+                ],
+                frameworks: [
+                    { name: 'Pandas', icon: '🐼' },
+                    { name: 'Numpy', icon: '🔢' },
+                    { name: 'Matplotlib', icon: '📊' },
+                    { name: 'Seaborn', icon: '📈' },
+                    { name: 'MoviePy', icon: '🎬' },
+                    { name: 'BeautifulSoup', icon: '🍲' },
+                    { name: 'Tensorflow', icon: '🔥' },
+                    { name: 'OpenCV', icon: '📷'}
+                ],
+                ml: [
+                    { name: 'Regression', icon: '📉' },
+                    { name: 'Classification', icon: '🏷️' },
+                    { name: 'Clustering', icon: ' KMeans' },
+                    { name: 'Neural Networks', icon: '🧠' },
+                    { name: 'Deep Learning', icon: '🤖' }
+                ],
+                ai: [
+                    { name: 'GPT-4 Vision', icon: '👁️' },
+                    { name: 'Whisper', icon: '🎤' },
+                    { name: 'Ollama', icon: '🦙' },
+                    { name: 'LangChain', icon: '🔗' },
+                    { name: 'LangGraph', icon: '🕸️' },
+                    { name: 'Scikit-learn', icon: '⚙️' },
+                    { name: 'NLP', icon: '🗣️' }
+                ],
+                web: [
+                    { name: 'HTML', icon: '📄' },
+                    { name: 'CSS', icon: '🎨' },
+                    { name: 'JavaScript', icon: '📜' },
+                    { name: 'React', icon: '⚛️' },
+                    { name: 'Tailwind CSS', icon: '💨' }
+                ],
+                db: [
+                    { name: 'MongoDB', icon: '🍃' },
+                    { name: 'PostgreSQL', icon: '🐘' },
+                    { name: 'Pinecone', icon: '🌲' },
+                    { name: 'ChromaDB', icon: '🌈' },
+                    { name: 'Git', icon: '🌿' },
+                    { name: 'VS Code', icon: '💻' },
+                    { name: 'Jupyter', icon: '📓' }
+                ]
+            };
+
+            for (const category in skillsData) {
+                const container = document.getElementById(category);
+                if (container) {
+                    skillsData[category].forEach(skill => {
+                        const skillEl = document.createElement('div');
+                        skillEl.className = 'bg-card p-4 rounded-lg flex flex-col items-center justify-center gap-2';
+                        skillEl.innerHTML = `<span class="text-3xl">${skill.icon}</span><span>${skill.name}</span>`;
+                        container.appendChild(skillEl);
+                    });
+                }
+            }
+
+            // Populate Projects
+            const projectsData = [
+                {
+                    title: "Panasonic Self-Help Chatbot",
+                    description: "An AI chatbot that answers product queries by extracting data from 50+ Panasonic manuals and 1000+ user reviews.",
+                    tags: ["React", "Ollama", "ChromaDB"],
+                    github: "https://github.com/pratyushcodes-source/PANASONIC",
+                    live: "https://panasonic-chatbot.vercel.app/"
+                },
+                {
+                    title: "Exceldes Interior AI Tool",
+                    description: "A full-stack AI tool that generates GPT-4 Vision-based makeover suggestions for uploaded room images.",
+                    tags: ["React", "Pinecone", "GPT-4"],
+                    github: "https://github.com/pratyushcodes-source/ExcelDes-Interior-Design",
+                    live: "https://excel-des-interior-design-t6ps.vercel.app/"
+                },
+                {
+                    title: "Toxic Comments Classifier",
+                    description: "A deployed multi-label NLP model to classify toxic comments, achieving 91.8% accuracy and 0.97 ROC-AUC.",
+                    tags: ["Python", "Scikit-learn"],
+                    github: "https://github.com/pratyushcodes-source/ToxicCommentsClassifier",
+                    live: null
+                },
+                {
+                    title: "ShopSage: AI Shopping Assistant",
+                    description: "A multimodal AI app to recognize products from images and retrieve shopping links using a 3-agent system built with LangGraph.",
+                    tags: ["LangGraph", "Streamlit", "Python"],
+                    github: "https://github.com/pratyushcodes-source/ShopSage",
+                    live: null
+                },
+                {
+                    title: "Vedanta Geopolitical Analyser",
+                    description: "A full-stack web app to help UPSC students analyze geopolitical topics through interactive, model-driven insights and downloadable PDF notes.",
+                    tags: ["React", "Node.js", "jsPDF"],
+                    github: "https://github.com/pratyushcodes-source/VEDANTA-GEOPOLITICAL-ANALYSER",
+                    live: "https://vedanta-geopolitical-analyser.vercel.app/"
+                },
+                {
+                    title: "Summarease",
+                    description: "An intelligent tool that provides concise summaries of long texts or articles, powered by advanced AI models.",
+                    tags: ["Python", "Streamlit", "AI"],
+                    github: "https://github.com/pratyushcodes-source/SummarEase",
+                    live: null
+                }
+            ];
+
+            const projectsContainer = document.querySelector('#projects .grid');
+            if (projectsContainer) {
+                projectsData.forEach(project => {
+                    const projectEl = document.createElement('div');
+                    projectEl.className = 'bg-card rounded-lg border border-slate-800 flex flex-col gsap-reveal overflow-hidden';
+                    
+                    let tagsHtml = project.tags.map(tag => `<span class="text-xs bg-zinc-700 text-cyan-300 px-2 py-1 rounded-full">${tag}</span>`).join('');
+                    let linksHtml = `<a href="${project.github}" target="_blank" class="text-slate-300 hover:text-cyan-400 transition-colors font-medium">Code</a>`;
+                    if (project.live) {
+                        linksHtml += `<a href="${project.live}" target="_blank" class="text-slate-300 hover:text-cyan-400 transition-colors font-medium">Live Demo</a>`;
+                    }
+
+                    projectEl.innerHTML = `
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold text-heading mb-3">${project.title}</h3>
+                            <p class="text-slate-400 text-sm mb-4 flex-grow">${project.description}</p>
+                            <div class="flex flex-wrap gap-2 my-4">${tagsHtml}</div>
+                        </div>
+                        <div class="mt-auto p-6 pt-0 flex items-center gap-4">${linksHtml}</div>
+                    `;
+                    projectsContainer.appendChild(projectEl);
+                });
+                // Re-run GSAP to discover the new elements
+                gsap.utils.toArray('.gsap-reveal').forEach(elem => {
+                    gsap.fromTo(elem, { y: 50, opacity: 0 }, {
+                        y: 0,
+                        opacity: 1,
+                        duration: 1,
+                        scrollTrigger: {
+                            trigger: elem,
+                            start: 'top 90%',
+                            toggleActions: 'play none none none'
+                        }
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
