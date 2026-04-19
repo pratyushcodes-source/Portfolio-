@@ -17,10 +17,10 @@
             color: #e2e8f0; /* Slate-200 */
         }
         .glass-effect {
-            background: rgba(0, 0, 0, 0.7); /* Black with opacity */
+            background: rgba(0, 0, 0, 0.7);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(51, 65, 85, 0.5); /* Slate-700 with opacity */
+            border-bottom: 1px solid rgba(51, 65, 85, 0.5);
         }
         .accent-color {
             color: #22d3ee; /* Cyan-400 */
@@ -43,32 +43,144 @@
         .bg-chip {
             background-color: #27272a; /* Zinc-800 */
         }
-        .btn {
+        /* Header styling - subtle enhancements */
+        header {
+            background: transparent;
             transition: all 0.3s ease;
         }
+        header:has(#main-nav a:hover),
+        header.glass-effect {
+            background: rgba(0, 0, 0, 0.5);
+            border-bottom: 1px solid rgba(34, 211, 238, 0.2);
+        }
+        /* Navigation link styling */
+        header nav a:not(.btn) {
+            position: relative;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        header nav a:not(.btn)::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #22d3ee, transparent);
+            transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        header nav a:not(.btn):hover {
+            color: #22d3ee;
+        }
+        header nav a:not(.btn):hover::after {
+            width: 100%;
+        }
+        /* Contact button - subtle premium styling */
+        .btn {
+            border: 1.5px solid #22d3ee;
+            color: #22d3ee;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0);
+            position: relative;
+            overflow: hidden;
+        }
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(34, 211, 238, 0.1);
+            transition: left 0.3s ease;
+        }
         .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(34, 211, 238, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(34, 211, 238, 0.25);
+            border-color: #22d3ee;
+        }
+        .btn:hover::before {
+            left: 100%;
+        }
+        /* Logo styling */
+        header .text-2xl {
+            transition: all 0.3s ease;
+        }
+        header .text-2xl svg {
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 4px rgba(34, 211, 238, 0.2));
+        }
+        header .text-2xl:hover svg {
+            transform: scale(1.1) rotate(5deg);
+            filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
+        }
+        /* Mobile menu styling */
+        #mobile-menu {
+            background: rgba(15, 15, 20, 0.95);
+            backdrop-filter: blur(8px);
+            border-top: 1px solid rgba(34, 211, 238, 0.15);
+            animation: slideDown 0.3s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        #mobile-menu a {
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            position: relative;
+        }
+        #mobile-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: linear-gradient(180deg, #22d3ee, #0ea5e9);
+            transition: height 0.3s ease;
+        }
+        #mobile-menu a:hover::before {
+            height: 100%;
+        }
+        #mobile-menu a:hover {
+            color: #22d3ee;
+            background: rgba(34, 211, 238, 0.05);
+            padding-left: 1rem;
+        }
+        /* Hamburger icon */
+        #mobile-menu-button {
+            transition: all 0.3s ease;
+        }
+        #mobile-menu-button:hover {
+            transform: scale(1.15);
+            color: #22d3ee;
         }
         /* Timeline styling */
         .timeline-item {
             position: relative;
-            padding-left: 2.5rem;
+            padding-left: 3rem;
             padding-bottom: 2rem;
-            border-left: 2px solid #334155; /* Slate-700 */
+            border-left: 2px solid #334155;
         }
         .timeline-item:last-child {
             border-left: 2px solid transparent;
         }
         .timeline-dot {
             position: absolute;
-            left: -0.5rem;
+            left: -0.75rem;
             top: 0.25rem;
-            height: 1rem;
-            width: 1rem;
+            height: 1.5rem;
+            width: 1.5rem;
             background-color: #22d3ee;
             border-radius: 9999px;
             border: 2px solid #000;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
         }
         /* Marquee animation for testimonials */
         @keyframes marquee {
@@ -108,6 +220,292 @@
             50% { opacity: 0; }
             100% { opacity: 1; }
         }
+        /* Project enhancements */
+        .project-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(30, 30, 35, 0.8), rgba(24, 24, 28, 0.6));
+            position: relative;
+            overflow: hidden;
+        }
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .project-card:hover::before {
+            left: 100%;
+        }
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.2);
+            border-color: rgba(34, 211, 238, 0.4);
+        }
+        .project-tag {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            transition: all 0.2s ease;
+        }
+        .project-tag:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #4b5563, #6b7280);
+        }
+        .project-link {
+            transition: all 0.2s ease;
+        }
+        .project-link:hover {
+            transform: translateY(-2px);
+        }
+        /* Skill item enhancements */
+        .skill-item {
+            background: linear-gradient(135deg, rgba(30, 30, 35, 0.8), rgba(24, 24, 28, 0.6));
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .skill-item:hover::before {
+            left: 100%;
+        }
+        .skill-item:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(34, 211, 238, 0.15);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+        }
+        /* Competency enhancements */
+        .competency-card {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(30, 30, 35, 0.8), rgba(24, 24, 28, 0.6));
+            position: relative;
+            overflow: hidden;
+        }
+        .competency-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(34, 211, 238, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+        .competency-card:hover::before {
+            left: 100%;
+        }
+        .competency-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(34, 211, 238, 0.15);
+            border-color: rgba(34, 211, 238, 0.4);
+        }
+        .competency-chip {
+            background: linear-gradient(135deg, #374151, #4b5563);
+            transition: all 0.2s ease;
+        }
+        .competency-chip:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #4b5563, #6b7280);
+        }
+        .competency-card svg {
+            transition: transform 0.3s ease;
+        }
+        .competency-card:hover svg {
+            transform: scale(1.15) rotate(5deg);
+        }
+        /* Contact card enhancements */
+        .contact-card {
+            background: linear-gradient(135deg, rgba(30, 30, 35, 0.8), rgba(24, 24, 28, 0.6));
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        /* About section styling - PREMIUM */
+        #about {
+            background: linear-gradient(180deg, rgba(34,211,238,0.08), rgba(0,0,0,0.01), rgba(34,211,238,0.04));
+            position: relative;
+            overflow: hidden;
+        }
+        #about::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(34,211,238,0.6), transparent);
+        }
+        #about::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(34,211,238,0.3), transparent);
+        }
+        .about-content {
+            position: relative;
+        }
+        .about-content h2 {
+            background: linear-gradient(135deg, #f8fafc 0%, #e0f2fe 50%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+        .about-content p {
+            line-height: 2;
+            font-weight: 500;
+            color: #d1d5db;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 1.25rem;
+        }
+        .about-content p:last-child {
+            margin-bottom: 0;
+        }
+        .about-content p span {
+            background: linear-gradient(135deg, #22d3ee 0%, #0ea5e9 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+        /* Achievements section styling - PREMIUM */
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(30, 30, 35, 0.8), rgba(20, 20, 28, 0.6));
+            border: 2px solid rgba(34, 211, 238, 0.25);
+            padding: 2.25rem;
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            gap: 1.75rem;
+            box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.05);
+        }
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(34, 211, 238, 0.25), transparent);
+            transition: all 0.8s ease;
+            pointer-events: none;
+        }
+        .achievement-card:hover::before {
+            top: -50%;
+            left: -25%;
+        }
+        .achievement-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            border-color: rgba(34, 211, 238, 0.6);
+            box-shadow: 0 20px 50px rgba(34, 211, 238, 0.3), inset 0 1px 1px rgba(255, 255, 255, 0.1);
+        }
+        .achievement-icon {
+            flex-shrink: 0;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.2), rgba(34, 211, 238, 0.08));
+            border: 2px solid rgba(34, 211, 238, 0.4);
+            border-radius: 16px;
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            box-shadow: 0 8px 24px rgba(34, 211, 238, 0.15);
+        }
+        .achievement-icon::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.3), transparent 60%);
+            border-radius: 16px;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        .achievement-card:hover .achievement-icon::before {
+            opacity: 1;
+        }
+        .achievement-card:hover .achievement-icon {
+            background: linear-gradient(135deg, rgba(34, 211, 238, 0.35), rgba(34, 211, 238, 0.15));
+            transform: scale(1.2) rotate(12deg);
+            border-color: rgba(34, 211, 238, 0.8);
+            box-shadow: 0 12px 36px rgba(34, 211, 238, 0.4);
+        }
+        .achievement-icon svg {
+            width: 36px;
+            height: 36px;
+            color: #22d3ee;
+            filter: drop-shadow(0 0 8px rgba(34, 211, 238, 0.4));
+            transition: all 0.4s ease;
+            z-index: 1;
+            position: relative;
+        }
+        .achievement-card:hover .achievement-icon svg {
+            filter: drop-shadow(0 0 16px rgba(34, 211, 238, 0.8));
+            transform: scale(1.15);
+        }
+        .achievement-text {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        .achievement-text h4 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: #f0f9ff;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s ease;
+            letter-spacing: -0.01em;
+            line-height: 1.4;
+        }
+        .achievement-card:hover .achievement-text h4 {
+            color: #22d3ee;
+            text-shadow: 0 0 12px rgba(34, 211, 238, 0.4);
+        }
+        .achievement-text p {
+            font-size: 0.98rem;
+            color: #cbd5e1;
+            line-height: 1.7;
+            transition: color 0.3s ease;
+            font-weight: 500;
+        }
+        .achievement-card:hover .achievement-text p {
+            color: #e2e8f0;
+        }
+        .achievements-container {
+            position: relative;
+        }
+        .achievements-container h3 {
+            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #22d3ee 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 2.5rem;
+            font-size: 2.25rem;
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -128,7 +526,7 @@
                 <a href="#skills" class="hover:text-cyan-400 transition-colors duration-300">Skills</a>
                 <a href="#projects" class="hover:text-cyan-400 transition-colors duration-300">Projects</a>
                 <a href="#testimonials" class="hover:text-cyan-400 transition-colors duration-300">Testimonials</a>
-                <a href="#contact" class="border border-cyan-400 text-cyan-400 px-4 py-2 rounded-md hover:bg-cyan-400/10 transition-colors duration-300 btn">Contact</a>
+                <a href="#contact" class="btn border border-cyan-400 text-cyan-400 px-4 py-2 rounded-md hover:bg-cyan-400/10 transition-colors duration-300">Contact</a>
             </div>
             <!-- Mobile Menu Button -->
             <button id="mobile-menu-button" class="md:hidden text-heading focus:outline-none">
@@ -138,7 +536,7 @@
             </button>
         </nav>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-zinc-900">
+        <div id="mobile-menu" class="hidden md:hidden">
              <a href="#about" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">About</a>
             <a href="#experience" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Experience</a>
             <a href="#skills" class="block py-3 px-6 text-sm hover:text-cyan-400 transition-colors duration-300">Skills</a>
@@ -168,33 +566,43 @@
 
         <!-- About Section -->
         <section id="about" class="py-20 md:py-32">
-            <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-12 items-start">
-                <div class="md:col-span-2 gsap-reveal">
-                    <h2 class="text-3xl font-bold text-heading mb-6">About Me</h2>
-                    <div class="space-y-4 text-slate-400">
-                        <p>
-                           Hello! I'm Pratyush, a developer and student at <span class="text-cyan-400 font-medium">Thapar Institute of Engineering and Technology</span>, passionate about building full-stack AI applications.
-                        </p>
-                        <p>
-                           My experience includes creating an intelligent chatbot for <span class="text-cyan-400 font-medium">Panasonic</span> and an AI interior design tool for <span class="text-cyan-400 font-medium">Exceldes Interiors</span>, where I turn complex challenges into intuitive solutions.
-                        </p>
-                    </div>
-                </div>
-                <div class="gsap-reveal" data-gsap-delay="100">
-                    <h3 class="text-2xl font-bold text-heading mb-6">Achievements</h3>
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-4">
-                            <svg class="w-10 h-10 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9a9.75 9.75 0 01-4.874-1.933m18.748 0a9.75 9.75 0 00-4.874-1.933h-9m13.874 0a9.75 9.75 0 00-13.874 0M12 21v-2.25A4.5 4.5 0 007.5 14.25v-3.75a4.5 4.5 0 019 0v3.75a4.5 4.5 0 00-4.5 4.5V21z" /></svg>
-                            <div>
-                                <h4 class="font-bold text-heading">Silver Medalist, Mathematics Olympiad</h4>
-                                <p class="text-sm text-slate-400">Secured top rank in Delhi regional round.</p>
+            <div class="max-w-4xl mx-auto">
+                <div class="grid grid-cols-1 gap-12 items-start">
+                    <div class="gsap-reveal">
+                        <div class="about-content">
+                            <h2 class="text-3xl font-bold mb-6">About Me</h2>
+                            <div class="space-y-4 text-slate-300">
+                                <p>
+                                   Hello! I'm Pratyush, a developer and student at <span class="text-cyan-400 font-semibold">Thapar Institute of Engineering and Technology</span>, passionate about building full-stack AI applications that solve real-world problems.
+                                </p>
+                                <p>
+                                   My experience includes creating an intelligent chatbot for <span class="text-cyan-400 font-semibold">Panasonic</span> and an AI interior design tool for <span class="text-cyan-400 font-semibold">Exceldes Interiors</span>, where I turn complex challenges into intuitive, scalable solutions.
+                                </p>
                             </div>
                         </div>
-                        <div class="flex items-center gap-4">
-                            <svg class="w-10 h-10 text-cyan-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12.75 18.5a6.25 6.25 0 100-12.5 6.25 6.25 0 000 12.5zM12 22a1 1 0 001-1v-2.5a1 1 0 10-2 0V21a1 1 0 001 1z" /></svg>
-                            <div>
-                                <h4 class="font-bold text-heading">Runner-up, Table Tennis</h4>
-                                <p class="text-sm text-slate-400">Thaparlympics 2025, Inter-university Championship.</p>
+                    </div>
+                    <div class="gsap-reveal" data-gsap-delay="100">
+                        <div class="achievements-container">
+                            <h3 class="text-2xl font-bold mb-6">Achievements</h3>
+                            <div class="space-y-4">
+                                <div class="achievement-card">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5-15a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                    </div>
+                                    <div class="achievement-text">
+                                        <h4>Silver Medalist, Mathematics Olympiad</h4>
+                                        <p>Secured top rank in Delhi regional round.</p>
+                                    </div>
+                                </div>
+                                <div class="achievement-card">
+                                    <div class="achievement-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M14.25 6.087c0-.355.186-.676.461-.841A6.52 6.52 0 0021 4.5c.88 0 1.722.104 2.541.306m-9.272 9.025a49.52 49.52 0 015.668 2.612m-9.668-9.668a2.25 2.25 0 011.5.97c.5.855 2.372 1.05 3.5.8.531-.086 1.047.537 1.047 1.059 0 .213-.038.419-.122.609a6 6 0 01-1.752 4.007l-1.348 1.378c-.355.361-.915.822-1.214.994" /></svg>
+                                    </div>
+                                    <div class="achievement-text">
+                                        <h4>Runner-up, Table Tennis</h4>
+                                        <p>Thaparlympics 2025, Inter-university Championship.</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -203,9 +611,9 @@
         </section>
         
         <!-- Experience Section -->
-        <section id="experience" class="py-20 md:py-32">
+        <section id="experience" class="py-20 md:py-32" style="background: linear-gradient(135deg, rgba(0,0,0,0.02), rgba(34,211,238,0.05));">
             <h2 class="text-3xl font-bold text-heading text-center mb-12 gsap-reveal">Experience</h2>
-            <div class="max-w-3xl mx-auto gsap-reveal">
+            <div class="max-w-4xl mx-auto gsap-reveal">
                 <div class="timeline-item">
                     <div class="timeline-logo">
                         <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
@@ -214,6 +622,7 @@
                     <p class="text-cyan-400 font-medium mb-2">AI/ML Intern | June 2025 – August 2025</p>
                     <p class="text-slate-400 text-sm mb-3">Developed an intelligent self-help chatbot to replace Panasonic’s outdated FAQ system, boosting customer engagement. Implemented local inference using Ollama and a robust RAG pipeline.</p>
                     <p class="text-xs text-slate-500 italic">• Boosted customer engagement by replacing an outdated FAQ system.</p>
+                    <a href="https://drive.google.com/file/d/106UlHcsL57gm_ccBAfAMwVqZv6cg82oY/view" target="_blank" class="text-cyan-400 hover:underline text-xs mt-1 inline-block certificate-link">View Certificate</a>
                 </div>
                 <div class="timeline-item">
                     <div class="timeline-logo">
@@ -223,15 +632,16 @@
                     <p class="text-cyan-400 font-medium mb-2">Technology Development Intern | June 2024 – August 2024</p>
                     <p class="text-slate-400 text-sm mb-3">Built a full-stack AI-powered interior design website that converts real room photos into personalized design makeovers, featuring a vector-based recommendation engine.</p>
                     <p class="text-xs text-slate-500 italic">• Converted real room photos into personalized design makeovers with AI.</p>
+                    <a href="https://drive.google.com/file/d/1ho-SNZbh5kSne2OBCChe9O9aG_TXUTt0/view" target="_blank" class="text-cyan-400 hover:underline text-xs mt-1 inline-block certificate-link">View Certificate</a>
                 </div>
                 <div class="timeline-item">
                      <div class="timeline-logo">
                         <svg class="w-6 h-6 text-cyan-400" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-heading mb-1">Vedanta IAS Academy</h3>
-                    <p class="text-cyan-400 font-medium mb-2">Full-Stack Developer | Jan 2024 – Feb 2024</p>
-                    <p class="text-slate-400 text-sm mb-3">Built a full-stack web app to help UPSC students analyze geopolitical topics through interactive, model-driven insights, with downloadable PDF notes.</p>
-                    <p class="text-xs text-slate-500 italic">• Enabled geopolitical analysis for students with model-driven insights.</p>
+                    <h3 class="text-xl font-bold text-heading mb-1">Volvo Group</h3>
+                    <p class="text-cyan-400 font-medium mb-2">Software Developer Intern | Jan 2026 – July 2026</p>
+                    <p class="text-slate-400 text-sm mb-3">Actively contributing to software development projects at Volvo.</p>
+                    <p class="text-xs text-slate-500 italic">• Contributing to innovative software solutions.</p>
                 </div>
             </div>
         </section>
@@ -258,13 +668,13 @@
                     <h3 class="text-2xl font-bold text-heading mb-6">Volunteer Work</h3>
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <h4 class="font-bold text-heading">Toyota Road Safety Summit</h4>
+                        <h4 class="font-bold text-heading flex items-center"><svg class="w-5 h-5 text-cyan-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 1c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2s2-.9 2-2V3c0-1.1-.9-2-2-2zm0 3.5c.28 0 .5.22.5.5v6.5c0 .28-.22.5-.5.5s-.5-.22-.5-.5V5c0-.28.22-.5.5-.5zM12 15c-2.76 0-5-2.24-5-5V5c0-.55-.45-1-1-1s-1 .45-1 1v5c0 3.87 3.13 7 7 7s7-3.13 7-7V5c0-.55-.45-1-1-1s-1 .45-1 1v5c0 2.76-2.24 5-5 5z" /></svg>Toyota Road Safety Summit</h4>
                         <p class="text-cyan-400 font-medium mb-2">Speaker | Jan 2019 - Present</p>
                         <p class="text-slate-400 text-sm">Addressed the summit to raise awareness about road safety, advocating for safer driving practices and engaging with attendees to promote responsible road behavior.</p>
                     </div>
                     <div class="timeline-item">
                         <div class="timeline-dot"></div>
-                        <h4 class="font-bold text-heading">Bal Vikas Organization</h4>
+                        <h4 class="font-bold text-heading flex items-center"><svg class="w-5 h-5 text-cyan-400 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>Bal Vikas Organization</h4>
                         <p class="text-cyan-400 font-medium mb-2">Volunteer Educator | March 2023</p>
                         <p class="text-slate-400 text-sm">Provided personalized math tutoring to underprivileged students, fostering a supportive learning environment and improving academic performance.</p>
                     </div>
@@ -273,38 +683,52 @@
         </section>
 
         <!-- Core Competencies Section -->
-        <section id="core-competencies" class="py-20 md:py-32">
+        <section id="core-competencies" class="py-20 md:py-32" style="background: linear-gradient(135deg, rgba(34,211,238,0.05), rgba(0,0,0,0.02));">
             <div class="max-w-5xl mx-auto text-center">
-                 <h2 class="text-3xl font-bold text-heading mb-12 gsap-reveal">Core Competencies</h2>
-                 <div class="grid md:grid-cols-3 gap-8 text-left">
-                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal">
-                         <h3 class="text-xl font-bold text-heading mb-4">Relevant Coursework</h3>
+                 <h2 class="text-3xl font-bold text-heading mb-2 gsap-reveal">Core Competencies</h2>
+                 <p class="text-slate-400 mb-12 gsap-reveal">My expertise across various domains</p>
+                 <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-left">
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal competency-card">
+                         <h3 class="text-xl font-bold text-heading mb-4"><svg class="w-6 h-6 text-cyan-400 mr-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" /></svg>Relevant Coursework</h3>
                          <div class="flex flex-wrap gap-2">
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">DBMS</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Operating Systems</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Data Structures</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Algorithms</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">OOPS</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">AI & NLP</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Machine Learning</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">DBMS</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Operating Systems</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Data Structures</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Algorithms</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">OOPS</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">AI & NLP</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Machine Learning</span>
                          </div>
                      </div>
-                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal" data-gsap-delay="100">
-                         <h3 class="text-xl font-bold text-heading mb-4">Soft Skills</h3>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal competency-card" data-gsap-delay="100">
+                         <h3 class="text-xl font-bold text-heading mb-4"><svg class="w-6 h-6 text-cyan-400 mr-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z" /></svg>Soft Skills</h3>
                          <div class="flex flex-wrap gap-2">
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Public Speaking</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Leadership</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Event Management</span>
-                            <span class="bg-chip px-3 py-1 rounded-full text-sm">Geopolitical Analysis</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Public Speaking</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Leadership</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Event Management</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Geopolitical Analysis</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Communication</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Teamwork</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Problem Solving</span>
+                            <span class="competency-chip px-3 py-1 rounded-full text-sm">Time Management</span>
                          </div>
                      </div>
-                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal" data-gsap-delay="200">
-                         <h3 class="text-xl font-bold text-heading mb-4">Coding Profiles</h3>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal competency-card" data-gsap-delay="200">
+                         <h3 class="text-xl font-bold text-heading mb-4"><svg class="w-6 h-6 text-cyan-400 mr-2 inline" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5" /></svg>Coding Profiles</h3>
                          <div class="space-y-4">
                              <div class="text-center">
-                                <h4 class="font-semibold text-2xl text-cyan-400">350+</h4>
+                                <h4 class="font-semibold text-2xl text-cyan-400 counter">0+</h4>
                                 <p class="text-sm text-slate-400">Problems Solved on LeetCode</p>
                                 <a href="https://leetcode.com/u/pratyushkr/" target="_blank" class="text-cyan-400 hover:underline text-sm mt-2 inline-block">View Profile</a>
+                             </div>
+                         </div>
+                     </div>
+                     <div class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal competency-card" data-gsap-delay="300">
+                         <h3 class="text-xl font-bold text-heading mb-4"><svg class="w-6 h-6 text-cyan-400 mr-2 inline" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>GitHub</h3>
+                         <div class="space-y-3 text-center">
+                             <div>
+                                <p class="text-sm text-slate-400 mb-3">15+ Quality Repositories & Active Contributor</p>
+                                <a href="https://github.com/pratyushcodes-source" target="_blank" class="text-cyan-400 hover:underline text-sm inline-block">View My GitHub</a>
                              </div>
                          </div>
                      </div>
@@ -352,8 +776,8 @@
                     <!-- Cards -->
                     <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
                         <p class="text-slate-400 mb-4">"Pratyush's work on the AI chatbot was exceptional. He delivered a high-quality product that significantly improved our customer support."</p>
-                        <p class="font-bold text-heading">Siva San</p>
-                        <p class="text-sm text-cyan-400">Tech Architect, Panasonic</p>
+                        <p class="font-bold text-heading">Narayan Kumar</p>
+                        <p class="text-sm text-cyan-400">Chief Business Officer, Panasonic</p>
                     </div>
                     <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
                         <p class="text-slate-400 mb-4">"His ability to quickly grasp complex concepts and implement them into a functional full-stack application is impressive. A true asset to the team."</p>
@@ -367,15 +791,15 @@
                     </div>
                      <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
                         <p class="text-slate-400 mb-4">"An incredibly sharp problem solver. Pratyush consistently finds elegant solutions to difficult algorithmic challenges."</p>
-                        <p class="font-bold text-heading">Sandeep Mandiya</p>
-                        <p class="text-sm text-cyan-400">Professor, Thapar Institute</p>
+                        <p class="font-bold text-heading">Yash Zende</p>
+                        <p class="text-sm text-cyan-400">Growth at Qwikbuild</p>
                     </div>
 
                     <!-- Duplicate Cards for seamless loop -->
                     <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
                         <p class="text-slate-400 mb-4">"Pratyush's work on the AI chatbot was exceptional. He delivered a high-quality product that significantly improved our customer support."</p>
-                        <p class="font-bold text-heading">Siva San</p>
-                        <p class="text-sm text-cyan-400">Tech Architect, Panasonic</p>
+                        <p class="font-bold text-heading">Narayan Kumar</p>
+                        <p class="text-sm text-cyan-400">Chief Business Officer, Panasonic</p>
                     </div>
                     <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
                         <p class="text-slate-400 mb-4">"His ability to quickly grasp complex concepts and implement them into a functional full-stack application is impressive. A true asset to the team."</p>
@@ -389,30 +813,46 @@
                     </div>
                      <div class="bg-card p-6 rounded-lg border border-slate-800 mx-4 w-80">
                         <p class="text-slate-400 mb-4">"An incredibly sharp problem solver. Pratyush consistently finds elegant solutions to difficult algorithmic challenges."</p>
-                        <p class="font-bold text-heading">Sandeep Mandiya</p>
-                        <p class="text-sm text-cyan-400">Professor, Thapar Institute</p>
+                        <p class="font-bold text-heading">Yash Zende</p>
+                        <p class="text-sm text-cyan-400">Growth at Qwikbuild</p>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section id="contact" class="py-20 md:py-32">
+        <section id="contact" class="py-20 md:py-32" style="background: linear-gradient(135deg, rgba(34,211,238,0.05), rgba(0,0,0,0.02));">
             <div class="max-w-4xl mx-auto text-center">
-                <h2 class="text-3xl font-bold text-heading mb-4 gsap-reveal">Get In Touch</h2>
-                <p class="text-slate-400 mb-8 gsap-reveal">I'm currently open to new opportunities and collaborations. Feel free to reach out!</p>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <a href="mailto:pratyushkr1002@gmail.com" class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal hover:border-cyan-400 transition-colors">
-                        <h3 class="text-xl font-bold text-heading mb-2">Email</h3>
-                        <p class="text-cyan-400">pratyushkr1002@gmail.com</p>
+                <h2 class="text-3xl font-bold text-heading mb-2 gsap-reveal">Get In Touch</h2>
+                <p class="text-slate-400 mb-12 gsap-reveal">I'm currently open to new opportunities and collaborations. Feel free to reach out!</p>
+                <div class="flex flex-wrap justify-center gap-8 gsap-reveal">
+                    <a href="mailto:pratyushkr1002@gmail.com" class="contact-card flex flex-col items-center gap-3 p-6 rounded-lg border border-slate-800 hover:border-cyan-400 transition-all transform hover:scale-105 group">
+                        <div class="p-3 bg-cyan-400/10 rounded-full group-hover:bg-cyan-400/20 transition-colors">
+                            <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25H4.5a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0021.75 4.5H2.25A2.25 2.25 0 002.25 6.75m19.5 0h-15m0 0l-1.41-1.41a2.25 2.25 0 00-3.182 0l-1.41 1.41" /></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-heading">Email</h3>
+                        <p class="text-sm text-slate-400">pratyushkr1002@gmail.com</p>
                     </a>
-                    <a href="tel:+919560388849" class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal hover:border-cyan-400 transition-colors" data-gsap-delay="100">
-                        <h3 class="text-xl font-bold text-heading mb-2">Phone</h3>
-                        <p class="text-cyan-400">+91 9560388849</p>
+                    <a href="tel:+919560388849" class="contact-card flex flex-col items-center gap-3 p-6 rounded-lg border border-slate-800 hover:border-cyan-400 transition-all transform hover:scale-105 group">
+                        <div class="p-3 bg-cyan-400/10 rounded-full group-hover:bg-cyan-400/20 transition-colors">
+                            <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-4.5a2.25 2.25 0 00-2.25-2.25h-3.476c.123-.09.251-.183.375-.27a9.01 9.01 0 005.85-8.99m-12 8.954H9m0 0H7.5a2.25 2.25 0 01-2.25-2.25v-1.372c0-.516.21-.998.558-1.358" /></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-heading">Phone</h3>
+                        <p class="text-sm text-slate-400">+91 9560388849</p>
                     </a>
-                    <a href="https://www.linkedin.com/in/pratyush-kumar-7b844a216/" target="_blank" class="bg-card p-6 rounded-lg border border-slate-800 gsap-reveal hover:border-cyan-400 transition-colors" data-gsap-delay="200">
-                        <h3 class="text-xl font-bold text-heading mb-2">LinkedIn</h3>
-                        <p class="text-cyan-400">Connect with me</p>
+                    <a href="https://www.linkedin.com/in/pratyush-kumar-7b844a216/" target="_blank" class="contact-card flex flex-col items-center gap-3 p-6 rounded-lg border border-slate-800 hover:border-cyan-400 transition-all transform hover:scale-105 group">
+                        <div class="p-3 bg-cyan-400/10 rounded-full group-hover:bg-cyan-400/20 transition-colors">
+                            <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.469v6.766z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-heading">LinkedIn</h3>
+                        <p class="text-sm text-slate-400">Connect with me</p>
+                    </a>
+                    <a href="https://github.com/pratyushcodes-source" target="_blank" class="contact-card flex flex-col items-center gap-3 p-6 rounded-lg border border-slate-800 hover:border-cyan-400 transition-all transform hover:scale-105 group">
+                        <div class="p-3 bg-cyan-400/10 rounded-full group-hover:bg-cyan-400/20 transition-colors">
+                            <svg class="w-8 h-8 text-cyan-400" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v 3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                        </div>
+                        <h3 class="text-lg font-bold text-heading">GitHub</h3>
+                        <p class="text-sm text-slate-400">View my work</p>
                     </a>
                 </div>
             </div>
@@ -423,12 +863,18 @@
     <!-- Footer -->
     <footer class="bg-transparent">
         <div class="container mx-auto px-6 py-8 text-center text-slate-500">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://www.linkedin.com/in/pratyush-kumar-7b844a216/" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">LinkedIn</a>
+                <a href="https://github.com/pratyushcodes-source" target="_blank" class="text-slate-400 hover:text-cyan-400 transition-colors">GitHub</a>
+                <a href="mailto:pratyushkr1002@gmail.com" class="text-slate-400 hover:text-cyan-400 transition-colors">Email</a>
+            </div>
             <p class="text-sm">Designed & Built by Pratyush Kumar</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    <button id="back-to-top" class="fixed bottom-8 right-8 bg-cyan-500 text-white p-3 rounded-full opacity-0 transition-opacity hover:bg-cyan-400">↑</button>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // Particle.js config
@@ -588,7 +1034,7 @@
                 if (container) {
                     skillsData[category].forEach(skill => {
                         const skillEl = document.createElement('div');
-                        skillEl.className = 'bg-card p-4 rounded-lg flex flex-col items-center justify-center gap-2';
+                        skillEl.className = 'skill-item p-4 rounded-lg flex flex-col items-center justify-center gap-2 border border-slate-800';
                         skillEl.innerHTML = `<span class="text-3xl">${skill.icon}</span><span>${skill.name}</span>`;
                         container.appendChild(skillEl);
                     });
@@ -619,18 +1065,18 @@
                     live: null
                 },
                 {
+                    title: "Personal Streak Tracker",
+                    description: "A personalized habit tracker with GitHub-style contribution graphs for gym, diet, and study streaks, featuring intensity levels and local storage.",
+                    tags: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
+                    github: "https://github.com/pratyushcodes-source/Personalised-Streak-Tracker",
+                    live: "https://pratyush-streakflow.vercel.app/"
+                },
+                {
                     title: "ShopSage: AI Shopping Assistant",
                     description: "A multimodal AI app to recognize products from images and retrieve shopping links using a 3-agent system built with LangGraph.",
                     tags: ["LangGraph", "Streamlit", "Python"],
                     github: "https://github.com/pratyushcodes-source/ShopSage",
                     live: null
-                },
-                {
-                    title: "Vedanta Geopolitical Analyser",
-                    description: "A full-stack web app to help UPSC students analyze geopolitical topics through interactive, model-driven insights and downloadable PDF notes.",
-                    tags: ["React", "Node.js", "jsPDF"],
-                    github: "https://github.com/pratyushcodes-source/VEDANTA-GEOPOLITICAL-ANALYSER",
-                    live: "https://vedanta-geopolitical-analyser.vercel.app/"
                 },
                 {
                     title: "Summarease",
@@ -645,12 +1091,12 @@
             if (projectsContainer) {
                 projectsData.forEach(project => {
                     const projectEl = document.createElement('div');
-                    projectEl.className = 'bg-card rounded-lg border border-slate-800 flex flex-col gsap-reveal overflow-hidden';
+                    projectEl.className = 'bg-card rounded-lg border border-slate-800 flex flex-col gsap-reveal overflow-hidden project-card';
                     
-                    let tagsHtml = project.tags.map(tag => `<span class="text-xs bg-zinc-700 text-cyan-300 px-2 py-1 rounded-full">${tag}</span>`).join('');
-                    let linksHtml = `<a href="${project.github}" target="_blank" class="text-slate-300 hover:text-cyan-400 transition-colors font-medium">Code</a>`;
+                    let tagsHtml = project.tags.map(tag => `<span class="project-tag text-xs text-cyan-300 px-2 py-1 rounded-full">${tag}</span>`).join('');
+                    let linksHtml = `<a href="${project.github}" target="_blank" class="project-link inline-block px-3 py-1 bg-slate-700 text-slate-300 rounded hover:bg-slate-600 transition-colors font-medium">Code</a>`;
                     if (project.live) {
-                        linksHtml += `<a href="${project.live}" target="_blank" class="text-slate-300 hover:text-cyan-400 transition-colors font-medium">Live Demo</a>`;
+                        linksHtml += `<a href="${project.live}" target="_blank" class="project-link inline-block px-3 py-1 bg-cyan-500 text-white rounded hover:bg-cyan-400 transition-colors font-medium ml-2">Live Demo</a>`;
                     }
 
                     projectEl.innerHTML = `
@@ -677,6 +1123,35 @@
                     });
                 });
             }
+
+            // GSAP counter animation for LeetCode problems
+            let counterValue = { value: 0 };
+            gsap.to(counterValue, {
+                value: 600,
+                duration: 8,
+                ease: 'power1.out',
+                onUpdate: () => {
+                    document.querySelector('.counter').textContent = Math.floor(counterValue.value) + '+';
+                },
+                scrollTrigger: {
+                    trigger: '#core-competencies',
+                    start: 'top 80%',
+                    once: true
+                }
+            });
+        });
+
+        // Back to top button
+        const backToTop = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('opacity-0');
+            } else {
+                backToTop.classList.add('opacity-0');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         });
     </script>
 </body>
